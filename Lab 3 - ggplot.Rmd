@@ -1,0 +1,38 @@
+---
+title: 'Lab 3 : ggplot'
+author: "Cole Lifer"
+date: "04/13/2022"
+output: 
+  html_document: 
+    theme: cerulean
+---
+
+```{r setup, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(tidyverse)
+library(scales)
+```
+
+## Plot Description
+
+The data provided is customer revenue data for a solar sales company that has been adjusted to protect customer privacy. Someone at the executive level may be intrigued to see what the total value of all existing accounts is by state. If one state sticks out in particular, they may want to understand why. Perhaps they should focus their efforts in one state because it produces the most accounts. Or most of their workforce could be based out of a certain state and they want to see the results. Either way, this is great preliminary testing and exploratory data analysis. I've color coded each state and tilted the Y-Axis so we can see the Total Account Value. Then I adjusted the axis labels to show the figures in an understandable way by removing scientific notation.
+
+
+```{r Solar Data, message=FALSE}
+
+revenue <- read_csv("Example Solar Data.csv") 
+
+new_revenue <- revenue %>%                                      
+              filter(!is.na(customer_state))
+
+
+ggplot(new_revenue, aes(x = customer_state ,y = gross_account_value)) + 
+  theme_classic() +
+  theme(axis.text.y = element_text(angle = 45, vjust = .5)) +
+  geom_col(size = 3) +
+  scale_y_continuous(labels = comma) +
+  labs(x='State',y='Total Acount Value', color = 'State')
+
+```
+
