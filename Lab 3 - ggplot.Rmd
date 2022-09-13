@@ -21,7 +21,7 @@ The data provided is customer revenue data for a solar sales company that has be
 
 ```{r Solar Data, message=FALSE}
 
-rev <- read_csv("Example Solar Data.csv") 
+revenue <- read_csv("Example Solar Data.csv") 
 
 new_revenue <- revenue %>%                                      
               filter(!is.na(customer_state))
